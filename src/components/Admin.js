@@ -1,9 +1,12 @@
 import React from 'react';
 
+import AjouterRecette from './AjouterRecette';
+
 class Admin extends React.Component {
 	render() {
 		return (
 			<div className="cards">
+				<AjouterRecette addRecipe={this.props.addRecipe} />
 				<footer>
 					<button onClick={(e) => this.props.loadSamples()} >
 						Remplir
@@ -14,7 +17,8 @@ class Admin extends React.Component {
 	}
 
 	static propTypes = {
-		loadSamples: React.PropTypes.func.isRequired
+		loadSamples: React.PropTypes.func.isRequired,
+		addRecipe: React.PropTypes.func.isRequired
 	}
 }
 
