@@ -32,14 +32,22 @@ class App extends React.Component {
 		this.setState({ recettes });
 	};
 
-	updateRecette = (key, newRecette) => {
-		
+	updateRecipe = (key, newRecette) => {
+		const recettes = {...this.state.recettes};
+		recettes[key] = newRecette;
+		this.setState({ recettes });
 	};
 
 	addRecipe = (recette) => {
 		const recettes = {...this.state.recettes};
 		const timestamp = Date.now();
 		recettes[`recette-${timestamp}`] = recette;
+		this.setState({ recettes });
+	};
+
+	deleteRecipe = key => {
+		const recettes = {...this.state.recettes};
+		recettes[key] = null;
 		this.setState({ recettes });
 	};
 
@@ -60,8 +68,12 @@ class App extends React.Component {
 					{cards}
 				</div>
 				<Admin
+					recettes={this.state.recettes}
 					loadSamples={this.loadSamples}
 					addRecipe={this.addRecipe}
+					updateRecipe={this.updateRecipe}
+					deleteRecipe={this.deleteRecipe}
+					pseudo={this.props.params.pseudo}
 				/>
 			</div>
 		);
